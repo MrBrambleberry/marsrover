@@ -30,6 +30,23 @@ public class MarsRover {
         }
     }
 
+    public void faceRight() {
+        switch (this.heading) {
+        case NORTH:
+            this.heading = CardinalDirection.EAST;
+            break;
+        case WEST:
+            this.heading = CardinalDirection.NORTH;
+            break;
+        case SOUTH:
+            this.heading = CardinalDirection.WEST;
+            break;
+        case EAST:
+            this.heading = CardinalDirection.SOUTH;
+            break;
+        }
+    }
+
     public String getPosition() {
         String shortHeading = new String();
         switch (this.heading) {

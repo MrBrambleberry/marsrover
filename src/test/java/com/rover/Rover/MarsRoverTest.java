@@ -23,4 +23,13 @@ public class MarsRoverTest {
         marsRover.faceLeft();
         assertEquals(expectedPosition, marsRover.getPosition());
     }
+
+    @ParameterizedTest
+    @CsvSource({ "NORTH,0:0:E", "EAST,0:0:S", "SOUTH,0:0:W", "WEST,0:0:N" })
+    public void the_rover_has_the_correct_heading_if_told_to_face_right(CardinalDirection heading,
+            String expectedPosition) {
+        MarsRover marsRover = new MarsRover(0, 0, heading);
+        marsRover.faceRight();
+        assertEquals(expectedPosition, marsRover.getPosition());
+    }
 }
