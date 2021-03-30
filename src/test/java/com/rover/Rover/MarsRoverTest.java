@@ -41,4 +41,14 @@ public class MarsRoverTest {
         marsRover.moveForward();
         assertEquals(expectedPosition, marsRover.getPosition());
     }
+
+    @ParameterizedTest
+    @CsvSource({ "0,5,NORTH,0:0:N", "5,2,EAST,0:2:E", "3,0,SOUTH,3:5:S", "0,4,WEST,5:4:W" })
+    public void the_rover_circumnavigates_the_planet_if_at_the_edge_and_told_to_move(int xCoordinate, int yCoordinate,
+            CardinalDirection heading, String expectedPosition) {
+        MarsRover marsRover = new MarsRover(xCoordinate, yCoordinate, heading);
+        marsRover.moveForward();
+        assertEquals(expectedPosition, marsRover.getPosition());
+
+    }
 }

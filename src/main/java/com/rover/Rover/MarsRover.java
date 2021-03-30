@@ -6,6 +6,7 @@ public class MarsRover {
     private int xCoordinate;
     private int yCoordinate;
     private CardinalDirection heading;
+    private static final int gridSize = 5;
 
     public MarsRover(int xCoordinate, int yCoordinate, CardinalDirection heading) {
         this.xCoordinate = xCoordinate;
@@ -50,16 +51,16 @@ public class MarsRover {
     public void moveForward() {
         switch (this.heading) {
         case NORTH:
-            this.yCoordinate++;
+            this.yCoordinate = yCoordinate + 1 > gridSize ? 0 : yCoordinate + 1;
             break;
         case WEST:
-            this.xCoordinate--;
+            this.xCoordinate = xCoordinate - 1 < 0 ? gridSize : xCoordinate - 1;
             break;
         case SOUTH:
-            this.yCoordinate--;
+            this.yCoordinate = yCoordinate - 1 < 0 ? gridSize : yCoordinate - 1;
             break;
         case EAST:
-            this.xCoordinate++;
+            this.xCoordinate = xCoordinate + 1 > gridSize ? 0 : xCoordinate + 1;
             break;
         }
     }
