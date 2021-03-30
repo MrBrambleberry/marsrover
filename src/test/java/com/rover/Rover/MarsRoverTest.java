@@ -32,4 +32,13 @@ public class MarsRoverTest {
         marsRover.faceRight();
         assertEquals(expectedPosition, marsRover.getPosition());
     }
+
+    @ParameterizedTest
+    @CsvSource({ "NORTH,3:4:N", "EAST,4:3:E", "SOUTH,3:2:S", "WEST,2:3:W" })
+    public void the_rover_moves_to_the_correct_position_if_told_to_move_forward(CardinalDirection heading,
+            String expectedPosition) {
+        MarsRover marsRover = new MarsRover(3, 3, heading);
+        marsRover.moveForward();
+        assertEquals(expectedPosition, marsRover.getPosition());
+    }
 }

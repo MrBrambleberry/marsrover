@@ -47,6 +47,23 @@ public class MarsRover {
         }
     }
 
+    public void moveForward() {
+        switch (this.heading) {
+        case NORTH:
+            this.yCoordinate++;
+            break;
+        case WEST:
+            this.xCoordinate--;
+            break;
+        case SOUTH:
+            this.yCoordinate--;
+            break;
+        case EAST:
+            this.xCoordinate++;
+            break;
+        }
+    }
+
     public String getPosition() {
         String shortHeading = new String();
         switch (this.heading) {
