@@ -65,6 +65,24 @@ public class MarsRover {
         }
     }
 
+    public void execute(String commandList) {
+        String[] commands = commandList.split("");
+
+        for (String command : commands) {
+            switch (command) {
+            case "L":
+                faceLeft();
+                break;
+            case "R":
+                faceRight();
+                break;
+            case "M":
+                moveForward();
+                break;
+            }
+        }
+    }
+
     public String getPosition() {
         String shortHeading = new String();
         switch (this.heading) {

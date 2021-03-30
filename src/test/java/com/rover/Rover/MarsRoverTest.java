@@ -49,6 +49,14 @@ public class MarsRoverTest {
         MarsRover marsRover = new MarsRover(xCoordinate, yCoordinate, heading);
         marsRover.moveForward();
         assertEquals(expectedPosition, marsRover.getPosition());
+    }
 
+    @ParameterizedTest
+    @CsvSource({ "1,2,NORTH,LMLMLMLMM,1:3:N", "3,3,EAST,MMRMMRMRRM,5:1:E" })
+    public void the_rover_executes_commands_and_ends_up_in_an_expected_position_and_heading(int xCoordinate,
+            int yCoordinate, CardinalDirection heading, String commandList, String expectedPosition) {
+        MarsRover marsRover = new MarsRover(xCoordinate, yCoordinate, heading);
+        marsRover.execute(commandList);
+        assertEquals(expectedPosition, marsRover.getPosition());
     }
 }
