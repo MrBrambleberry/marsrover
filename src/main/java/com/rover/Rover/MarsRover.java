@@ -15,37 +15,11 @@ public class MarsRover {
     }
 
     private void faceLeft() {
-        switch (this.heading) {
-            case NORTH:
-                this.heading = CardinalDirection.WEST;
-                break;
-            case WEST:
-                this.heading = CardinalDirection.SOUTH;
-                break;
-            case SOUTH:
-                this.heading = CardinalDirection.EAST;
-                break;
-            case EAST:
-                this.heading = CardinalDirection.NORTH;
-                break;
-        }
+        this.heading = this.heading.getToTheLeft();
     }
 
     private void faceRight() {
-        switch (this.heading) {
-            case NORTH:
-                this.heading = CardinalDirection.EAST;
-                break;
-            case WEST:
-                this.heading = CardinalDirection.NORTH;
-                break;
-            case SOUTH:
-                this.heading = CardinalDirection.WEST;
-                break;
-            case EAST:
-                this.heading = CardinalDirection.SOUTH;
-                break;
-        }
+        this.heading = this.heading.getToTheRight();
     }
 
     private void moveForward() {
