@@ -14,90 +14,92 @@ public class MarsRover {
         this.heading = heading;
     }
 
-    public void faceLeft() {
+    private void faceLeft() {
         switch (this.heading) {
-        case NORTH:
-            this.heading = CardinalDirection.WEST;
-            break;
-        case WEST:
-            this.heading = CardinalDirection.SOUTH;
-            break;
-        case SOUTH:
-            this.heading = CardinalDirection.EAST;
-            break;
-        case EAST:
-            this.heading = CardinalDirection.NORTH;
-            break;
+            case NORTH:
+                this.heading = CardinalDirection.WEST;
+                break;
+            case WEST:
+                this.heading = CardinalDirection.SOUTH;
+                break;
+            case SOUTH:
+                this.heading = CardinalDirection.EAST;
+                break;
+            case EAST:
+                this.heading = CardinalDirection.NORTH;
+                break;
         }
     }
 
-    public void faceRight() {
+    private void faceRight() {
         switch (this.heading) {
-        case NORTH:
-            this.heading = CardinalDirection.EAST;
-            break;
-        case WEST:
-            this.heading = CardinalDirection.NORTH;
-            break;
-        case SOUTH:
-            this.heading = CardinalDirection.WEST;
-            break;
-        case EAST:
-            this.heading = CardinalDirection.SOUTH;
-            break;
+            case NORTH:
+                this.heading = CardinalDirection.EAST;
+                break;
+            case WEST:
+                this.heading = CardinalDirection.NORTH;
+                break;
+            case SOUTH:
+                this.heading = CardinalDirection.WEST;
+                break;
+            case EAST:
+                this.heading = CardinalDirection.SOUTH;
+                break;
         }
     }
 
-    public void moveForward() {
+    private void moveForward() {
         switch (this.heading) {
-        case NORTH:
-            this.yCoordinate = yCoordinate + 1 > gridSize ? 0 : yCoordinate + 1;
-            break;
-        case WEST:
-            this.xCoordinate = xCoordinate - 1 < 0 ? gridSize : xCoordinate - 1;
-            break;
-        case SOUTH:
-            this.yCoordinate = yCoordinate - 1 < 0 ? gridSize : yCoordinate - 1;
-            break;
-        case EAST:
-            this.xCoordinate = xCoordinate + 1 > gridSize ? 0 : xCoordinate + 1;
-            break;
+            case NORTH:
+                this.yCoordinate = yCoordinate + 1 > gridSize ? 0 : yCoordinate + 1;
+                break;
+            case WEST:
+                this.xCoordinate = xCoordinate - 1 < 0 ? gridSize : xCoordinate - 1;
+                break;
+            case SOUTH:
+                this.yCoordinate = yCoordinate - 1 < 0 ? gridSize : yCoordinate - 1;
+                break;
+            case EAST:
+                this.xCoordinate = xCoordinate + 1 > gridSize ? 0 : xCoordinate + 1;
+                break;
         }
     }
 
-    public void execute(String commandList) {
+    public String execute(String commandList) {
         String[] commands = commandList.split("");
 
         for (String command : commands) {
             switch (command) {
-            case "L":
-                faceLeft();
-                break;
-            case "R":
-                faceRight();
-                break;
-            case "M":
-                moveForward();
-                break;
+                case "L":
+                    faceLeft();
+                    break;
+                case "R":
+                    faceRight();
+                    break;
+                case "M":
+                    moveForward();
+                    break;
             }
         }
+
+        return getPosition();
     }
 
-    public String getPosition() {
+    private String getPosition() {
         String shortHeading = new String();
         switch (this.heading) {
-        case NORTH:
-            shortHeading = "N";
-            break;
-        case SOUTH:
-            shortHeading = "S";
-            break;
-        case EAST:
-            shortHeading = "E";
-            break;
-        case WEST:
-            shortHeading = "W";
-            break;
+            case NORTH:
+                shortHeading = "N";
+                break;
+            case SOUTH:
+                shortHeading = "S";
+                break;
+            case EAST:
+                shortHeading = "E";
+                break;
+            case WEST:
+                shortHeading = "W";
+                break;
         }
 
         return this.xCoordinate + ":" + this.yCoordinate + ":" + shortHeading;

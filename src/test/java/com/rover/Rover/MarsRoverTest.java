@@ -12,7 +12,7 @@ public class MarsRoverTest {
     @Test
     public void the_rover_reports_its_position_correctly() {
         MarsRover marsRover = new MarsRover(0, 0, CardinalDirection.NORTH);
-        assertEquals("0:0:N", marsRover.getPosition());
+        assertEquals("0:0:N", marsRover.execute(""));
     }
 
     @ParameterizedTest
@@ -20,8 +20,7 @@ public class MarsRoverTest {
     public void the_rover_has_the_correct_heading_if_told_to_face_left(CardinalDirection heading,
             String expectedPosition) {
         MarsRover marsRover = new MarsRover(0, 0, heading);
-        marsRover.faceLeft();
-        assertEquals(expectedPosition, marsRover.getPosition());
+        assertEquals(expectedPosition, marsRover.execute("L"));
     }
 
     @ParameterizedTest
@@ -29,8 +28,7 @@ public class MarsRoverTest {
     public void the_rover_has_the_correct_heading_if_told_to_face_right(CardinalDirection heading,
             String expectedPosition) {
         MarsRover marsRover = new MarsRover(0, 0, heading);
-        marsRover.faceRight();
-        assertEquals(expectedPosition, marsRover.getPosition());
+        assertEquals(expectedPosition, marsRover.execute("R"));
     }
 
     @ParameterizedTest
@@ -38,8 +36,7 @@ public class MarsRoverTest {
     public void the_rover_moves_to_the_correct_position_if_told_to_move_forward(CardinalDirection heading,
             String expectedPosition) {
         MarsRover marsRover = new MarsRover(3, 3, heading);
-        marsRover.moveForward();
-        assertEquals(expectedPosition, marsRover.getPosition());
+        assertEquals(expectedPosition, marsRover.execute("M"));
     }
 
     @ParameterizedTest
@@ -47,8 +44,7 @@ public class MarsRoverTest {
     public void the_rover_circumnavigates_the_planet_if_at_the_edge_and_told_to_move(int xCoordinate, int yCoordinate,
             CardinalDirection heading, String expectedPosition) {
         MarsRover marsRover = new MarsRover(xCoordinate, yCoordinate, heading);
-        marsRover.moveForward();
-        assertEquals(expectedPosition, marsRover.getPosition());
+        assertEquals(expectedPosition, marsRover.execute("M"));
     }
 
     @ParameterizedTest
@@ -56,7 +52,6 @@ public class MarsRoverTest {
     public void the_rover_executes_commands_and_ends_up_in_an_expected_position_and_heading(int xCoordinate,
             int yCoordinate, CardinalDirection heading, String commandList, String expectedPosition) {
         MarsRover marsRover = new MarsRover(xCoordinate, yCoordinate, heading);
-        marsRover.execute(commandList);
-        assertEquals(expectedPosition, marsRover.getPosition());
+        assertEquals(expectedPosition, marsRover.execute(commandList));
     }
 }
