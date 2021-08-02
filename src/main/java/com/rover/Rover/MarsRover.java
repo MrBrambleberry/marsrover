@@ -39,7 +39,7 @@ public class MarsRover {
         }
     }
 
-    public String execute(String commandList) {
+    public String execute(String commandList) throws Exception {
         String[] commands = commandList.split("");
 
         for (String command : commands) {
@@ -53,6 +53,8 @@ public class MarsRover {
                 case "M":
                     moveForward();
                     break;
+                default:
+                    throw new Exception("Command not recognised");
             }
         }
 
