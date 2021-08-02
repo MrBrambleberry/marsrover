@@ -60,23 +60,7 @@ public class MarsRover {
     }
 
     private String getPosition() {
-        String shortHeading = new String();
-        switch (this.heading) {
-            case NORTH:
-                shortHeading = "N";
-                break;
-            case SOUTH:
-                shortHeading = "S";
-                break;
-            case EAST:
-                shortHeading = "E";
-                break;
-            case WEST:
-                shortHeading = "W";
-                break;
-        }
-
-        return this.xCoordinate + ":" + this.yCoordinate + ":" + shortHeading;
+        return this.xCoordinate + ":" + this.yCoordinate + ":" + this.heading.getCompassDirection();
     }
 
 }

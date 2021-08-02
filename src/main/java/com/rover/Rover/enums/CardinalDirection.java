@@ -1,14 +1,20 @@
 package com.rover.Rover.enums;
 
 public enum CardinalDirection {
-    NORTH("WEST", "EAST"), SOUTH("EAST", "WEST"), EAST("NORTH", "SOUTH"), WEST("SOUTH", "NORTH");
+    NORTH("N", "WEST", "EAST"), SOUTH("S", "EAST", "WEST"), EAST("E", "NORTH", "SOUTH"), WEST("W", "SOUTH", "NORTH");
 
+    private String compassDirection;
     private String toTheLeft;
     private String toTheRight;
 
-    CardinalDirection(String toTheLeft, String toTheRight) {
+    CardinalDirection(String compassDirection, String toTheLeft, String toTheRight) {
+        this.compassDirection = compassDirection;
         this.toTheLeft = toTheLeft;
         this.toTheRight = toTheRight;
+    }
+
+    public String getCompassDirection() {
+        return this.compassDirection;
     }
 
     public CardinalDirection getToTheLeft() {
