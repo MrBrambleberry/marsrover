@@ -3,14 +3,12 @@ package com.rover.Rover;
 import com.rover.Rover.enums.*;
 
 public class MarsRover {
-    private int xCoordinate;
-    private int yCoordinate;
+    private Coordinates coordinates;
     private CardinalDirection heading;
     private static final int gridSize = 5;
 
     public MarsRover(int xCoordinate, int yCoordinate, CardinalDirection heading) {
-        this.xCoordinate = xCoordinate;
-        this.yCoordinate = yCoordinate;
+        this.coordinates = new Coordinates(xCoordinate, yCoordinate, gridSize);
         this.heading = heading;
     }
 
@@ -25,16 +23,16 @@ public class MarsRover {
     private void moveForward() {
         switch (this.heading) {
             case NORTH:
-                this.yCoordinate = yCoordinate + 1 > gridSize ? 0 : yCoordinate + 1;
+                this.coordinates.incrementYCoordinate();
                 break;
             case WEST:
-                this.xCoordinate = xCoordinate - 1 < 0 ? gridSize : xCoordinate - 1;
+                this.coordinates.decrementXCoordinate();
                 break;
             case SOUTH:
-                this.yCoordinate = yCoordinate - 1 < 0 ? gridSize : yCoordinate - 1;
+                this.coordinates.decrementYCoordinate();
                 break;
             case EAST:
-                this.xCoordinate = xCoordinate + 1 > gridSize ? 0 : xCoordinate + 1;
+                this.coordinates.incrementXCoordinate();
                 break;
         }
     }
@@ -62,7 +60,8 @@ public class MarsRover {
     }
 
     private String getPosition() {
-        return this.xCoordinate + ":" + this.yCoordinate + ":" + this.heading.getCompassDirection();
+        return this.coordinates.getXCoordinate() + ":" + this.coordinates.getYCoordinate() + ":"
+                + this.heading.getCompassDirection();
     }
 
 }
