@@ -11,12 +11,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class MarsRoverTest {
 
+    Grid defaultGrid = new Grid(5,5);
+
     @ParameterizedTest
     @CsvSource({ "NORTH,0:0:W", "WEST,0:0:S", "SOUTH,0:0:E", "EAST,0:0:N" })
     public void the_rover_has_the_correct_heading_if_told_to_face_left(CardinalDirection heading,
             String expectedPosition) throws Exception {
         Coordinates coordinates = new Coordinates(0, 0);
-        MarsRover marsRover = new MarsRover(coordinates, heading);
+        MarsRover marsRover = new MarsRover(coordinates, heading, defaultGrid);
         assertEquals(expectedPosition, marsRover.execute("L"));
     }
 
@@ -25,7 +27,7 @@ public class MarsRoverTest {
     public void the_rover_has_the_correct_heading_if_told_to_face_right(CardinalDirection heading,
             String expectedPosition) throws Exception {
         Coordinates coordinates = new Coordinates(0, 0);
-        MarsRover marsRover = new MarsRover(coordinates, heading);
+        MarsRover marsRover = new MarsRover(coordinates, heading, defaultGrid);
         assertEquals(expectedPosition, marsRover.execute("R"));
     }
 
@@ -34,7 +36,7 @@ public class MarsRoverTest {
     public void the_rover_moves_to_the_correct_position_if_told_to_move_forward(CardinalDirection heading,
             String expectedPosition) throws Exception {
         Coordinates coordinates = new Coordinates(3, 3);
-        MarsRover marsRover = new MarsRover(coordinates, heading);
+        MarsRover marsRover = new MarsRover(coordinates, heading, defaultGrid);
         assertEquals(expectedPosition, marsRover.execute("M"));
     }
 
@@ -43,7 +45,7 @@ public class MarsRoverTest {
     public void the_rover_circumnavigates_the_planet_if_at_the_edge_and_told_to_move(int xCoordinate, int yCoordinate,
             CardinalDirection heading, String expectedPosition) throws Exception {
         Coordinates coordinates = new Coordinates(xCoordinate, yCoordinate);
-        MarsRover marsRover = new MarsRover(coordinates, heading);
+        MarsRover marsRover = new MarsRover(coordinates, heading, defaultGrid);
         assertEquals(expectedPosition, marsRover.execute("M"));
     }
 
@@ -52,14 +54,14 @@ public class MarsRoverTest {
     public void the_rover_executes_commands_and_ends_up_in_an_expected_position_and_heading(int xCoordinate,
             int yCoordinate, CardinalDirection heading, String commandList, String expectedPosition) throws Exception {
         Coordinates coordinates = new Coordinates(xCoordinate, yCoordinate);
-        MarsRover marsRover = new MarsRover(coordinates, heading);
+        MarsRover marsRover = new MarsRover(coordinates, heading, defaultGrid);
         assertEquals(expectedPosition, marsRover.execute(commandList));
     }
 
     @Test
     public void an_exception_is_thrown_if_a_command_the_rover_doesnt_understand_is_passed_to_it() {
         Coordinates coordinates = new Coordinates(0, 0);
-        MarsRover marsRover = new MarsRover(coordinates, CardinalDirection.NORTH);
+        MarsRover marsRover = new MarsRover(coordinates, CardinalDirection.NORTH, defaultGrid);
         Exception exception = assertThrows(Exception.class, () -> {
             marsRover.execute("?");
         });

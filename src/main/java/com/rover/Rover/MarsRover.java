@@ -5,11 +5,12 @@ import com.rover.Rover.enums.*;
 public class MarsRover {
     private Coordinates coordinates;
     private CardinalDirection heading;
-    private static final int gridSize = 5;
+    private Grid grid;
 
-    public MarsRover(Coordinates coordinates, CardinalDirection heading) {
+    public MarsRover(Coordinates coordinates, CardinalDirection heading, Grid grid) {
         this.coordinates = coordinates;
         this.heading = heading;
+        this.grid = grid;
     }
 
     private void faceLeft() {
@@ -23,16 +24,16 @@ public class MarsRover {
     private void moveForward() {
         switch (this.heading) {
             case NORTH:
-                this.coordinates.incrementYCoordinate(gridSize);
+                this.coordinates.incrementYCoordinate(grid.getDepth());
                 break;
             case WEST:
-                this.coordinates.decrementXCoordinate(gridSize);
+                this.coordinates.decrementXCoordinate(grid.getWidth());
                 break;
             case SOUTH:
-                this.coordinates.decrementYCoordinate(gridSize);
+                this.coordinates.decrementYCoordinate(grid.getDepth());
                 break;
             case EAST:
-                this.coordinates.incrementXCoordinate(gridSize);
+                this.coordinates.incrementXCoordinate(grid.getWidth());
                 break;
         }
     }
