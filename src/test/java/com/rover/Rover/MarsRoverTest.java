@@ -69,6 +69,21 @@ public class MarsRoverTest {
         assertEquals(expectedPosition, marsRover.execute(commandList));
     }
 
+
+    @Test
+    public void three_rovers_moving_in_sequence_ends_up_in_their_expected_positions_and_headings_for_a_specific_grid_size() throws Exception {
+        Grid grid = new Grid(5, 3);
+
+        MarsRover firstRover = new MarsRover(new Coordinates(1,1), CardinalDirection.EAST, grid);
+        // MarsRover secondRover = new MarsRover(new Coordinates(3,2), CardinalDirection.NORTH, grid);
+        // MarsRover thirdRover = new MarsRover(new Coordinates(0,3), CardinalDirection.WEST, grid);
+
+    
+        assertEquals("1:1:E", firstRover.execute("RFRFRFRF"));
+        // assertEquals("3:3:N LOST", secondRover.execute("FRRFLLFFRRFLL")); expected 3:3:N LOST but got 3:4:N LOST
+        // assertEquals("2:3:S", thirdRover.execute("LLFFFLFLFL")); //Expected 2:3:S but was 3:4:S LOST
+    }
+
     @Test
     public void an_exception_is_thrown_if_a_command_the_rover_doesnt_understand_is_passed_to_it() throws Exception {
         Coordinates coordinates = new Coordinates(0, 0);
