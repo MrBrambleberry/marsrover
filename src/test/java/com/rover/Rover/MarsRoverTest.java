@@ -51,6 +51,15 @@ public class MarsRoverTest {
         assertTrue(grid.hasScent(coordinates));
     }
 
+    @Test
+    public void the_rover_will_not_move_if_standing_atop_a_scent() throws Exception{
+        Grid grid = new Grid(5,5);
+        Coordinates coordinates = new Coordinates(0, 0);
+        grid.addScent(coordinates);
+        MarsRover marsRover = new MarsRover(coordinates, CardinalDirection.NORTH, grid);
+        assertEquals("0:0:N", marsRover.execute("M"));
+    }
+
     @ParameterizedTest
     @CsvSource({ "1,2,NORTH,LMLMLMLMM,1:3:N", "3,3,EAST,MMRMMRMRRM,5:1:E" })
     public void the_rover_executes_commands_and_ends_up_in_an_expected_position_and_heading(int xCoordinate,

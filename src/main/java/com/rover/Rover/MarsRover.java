@@ -71,7 +71,9 @@ public class MarsRover {
                     faceRight();
                     break;
                 case "M":
-                    moveForward();
+                    if(!grid.hasScent(this.coordinates)){
+                        moveForward();
+                    }
                     break;
                 default:
                     throw new Exception(unknownInstruction);
