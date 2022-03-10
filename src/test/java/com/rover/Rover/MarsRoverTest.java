@@ -71,4 +71,19 @@ public class MarsRoverTest {
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    public void an_exception_is_thrown_if_the_series_of_instructions_given_to_the_rover_are_too_long() {
+        Coordinates coordinates = new Coordinates(0, 0);
+        MarsRover marsRover = new MarsRover(coordinates, CardinalDirection.NORTH, defaultGrid);
+        
+        Exception exception = assertThrows(Exception.class, () -> {
+            marsRover.execute("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+        });
+
+        String expectedMessage = "The rover cannot parse a command list of 100 or more instructions";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }

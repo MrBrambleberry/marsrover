@@ -39,6 +39,11 @@ public class MarsRover {
     }
 
     public String execute(String commandList) throws Exception {
+        
+        if(commandList.length() >= 100){
+            throw new Exception("The rover cannot parse a command list of 100 or more instructions");
+        }
+        
         String[] commands = commandList.split("");
 
         for (String command : commands) {
