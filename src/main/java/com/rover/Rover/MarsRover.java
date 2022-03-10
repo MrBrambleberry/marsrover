@@ -25,6 +25,8 @@ public class MarsRover {
     }
 
     private void moveForward() {
+        Coordinates preMoveLocation = this.coordinates;
+
         switch (this.heading) {
             case NORTH:
                 this.coordinates.incrementYCoordinate();
@@ -42,10 +44,12 @@ public class MarsRover {
 
         if(this.coordinates.getYCoordinate() > grid.getDepth() || this.coordinates.getYCoordinate() < 0){
             isOutOfBounds = true;
+            grid.addScent(preMoveLocation);
         }
 
         if(this.coordinates.getXCoordinate() > grid.getWidth() || this.coordinates.getXCoordinate() < 0){
             isOutOfBounds = true;
+            grid.addScent(preMoveLocation);
         }
 
     }

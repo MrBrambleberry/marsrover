@@ -42,13 +42,14 @@ public class MarsRoverTest {
 
     @ParameterizedTest
     @CsvSource({ "0,5,NORTH,0:6:N LOST", "5,2,EAST,6:2:E LOST", "3,0,SOUTH,3:-1:S LOST", "0,4,WEST,-1:4:W LOST" })
-    public void the_rover_reports_itself_as_being_lost_if_it_falls_off_the_edge_of_the_grid(int xCoordinate, int yCoordinate,
+    public void the_rover_reports_itself_as_being_lost_if_it_falls_off_the_edge_of_the_grid_and_leaves_a_scent_behind(int xCoordinate, int yCoordinate,
             CardinalDirection heading, String expectedPosition) throws Exception {
+        Grid grid = new Grid(5,5);
         Coordinates coordinates = new Coordinates(xCoordinate, yCoordinate);
-        MarsRover marsRover = new MarsRover(coordinates, heading, defaultGrid);
+        MarsRover marsRover = new MarsRover(coordinates, heading, grid);
         assertEquals(expectedPosition, marsRover.execute("M"));
+        assertTrue(grid.hasScent(coordinates));
     }
-
 
     @ParameterizedTest
     @CsvSource({ "1,2,NORTH,LMLMLMLMM,1:3:N", "3,3,EAST,MMRMMRMRRM,5:1:E" })
