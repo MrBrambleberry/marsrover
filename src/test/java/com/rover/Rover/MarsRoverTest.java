@@ -37,7 +37,7 @@ public class MarsRoverTest {
             String expectedPosition) throws Exception {
         Coordinates coordinates = new Coordinates(3, 3);
         MarsRover marsRover = new MarsRover(coordinates, heading, defaultGrid);
-        assertEquals(expectedPosition, marsRover.execute("M"));
+        assertEquals(expectedPosition, marsRover.execute("F"));
     }
 
     @ParameterizedTest
@@ -47,7 +47,7 @@ public class MarsRoverTest {
         Grid grid = new Grid(5,5);
         Coordinates coordinates = new Coordinates(xCoordinate, yCoordinate);
         MarsRover marsRover = new MarsRover(coordinates, heading, grid);
-        assertEquals(expectedPosition, marsRover.execute("M"));
+        assertEquals(expectedPosition, marsRover.execute("F"));
         assertTrue(grid.hasScent(coordinates));
     }
 
@@ -57,11 +57,11 @@ public class MarsRoverTest {
         Coordinates coordinates = new Coordinates(0, 0);
         grid.addScent(coordinates);
         MarsRover marsRover = new MarsRover(coordinates, CardinalDirection.NORTH, grid);
-        assertEquals("0:0:N", marsRover.execute("M"));
+        assertEquals("0:0:N", marsRover.execute("F"));
     }
 
     @ParameterizedTest
-    @CsvSource({ "1,2,NORTH,LMLMLMLMM,1:3:N", "3,3,EAST,MMRMMRMRRM,5:1:E" })
+    @CsvSource({ "1,2,NORTH,LFLFLFLFF,1:3:N", "3,3,EAST,FFRFFRFRRF,5:1:E" })
     public void the_rover_executes_commands_and_ends_up_in_an_expected_position_and_heading(int xCoordinate,
             int yCoordinate, CardinalDirection heading, String commandList, String expectedPosition) throws Exception {
         Coordinates coordinates = new Coordinates(xCoordinate, yCoordinate);

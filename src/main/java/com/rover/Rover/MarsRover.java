@@ -70,7 +70,7 @@ public class MarsRover {
                 case "R":
                     faceRight();
                     break;
-                case "M":
+                case "F":
                     if(!grid.hasScent(this.coordinates)){
                         moveForward();
                     }
