@@ -8,6 +8,7 @@ public class MarsRover {
     private Grid grid;
     private final String instructionListTooLong = "The rover cannot parse a command list of 100 or more instructions";
     private final String unknownInstruction = "Command not recognised";
+    private boolean isOutOfBounds = false;
 
     public MarsRover(Coordinates coordinates, CardinalDirection heading, Grid grid) {
         this.coordinates = coordinates;
@@ -26,18 +27,27 @@ public class MarsRover {
     private void moveForward() {
         switch (this.heading) {
             case NORTH:
-                this.coordinates.incrementYCoordinate(grid.getDepth());
+                this.coordinates.incrementYCoordinate();
                 break;
             case WEST:
-                this.coordinates.decrementXCoordinate(grid.getWidth());
+                this.coordinates.decrementXCoordinate();
                 break;
             case SOUTH:
-                this.coordinates.decrementYCoordinate(grid.getDepth());
+                this.coordinates.decrementYCoordinate();
                 break;
             case EAST:
-                this.coordinates.incrementXCoordinate(grid.getWidth());
+                this.coordinates.incrementXCoordinate();
                 break;
         }
+
+        if(this.coordinates.getYCoordinate() > grid.getDepth() || this.coordinates.getYCoordinate() < 0){
+            isOutOfBounds = true;
+        }
+
+        if(this.coordinates.getXCoordinate() > grid.getWidth() || this.coordinates.getXCoordinate() < 0){
+            isOutOfBounds = true;
+        }
+
     }
 
     public String execute(String commandList) throws Exception {
@@ -68,8 +78,11 @@ public class MarsRover {
     }
 
     private String getPosition() {
-        return this.coordinates.getXCoordinate() + ":" + this.coordinates.getYCoordinate() + ":"
-                + this.heading.getCompassDirection();
+        String position = this.coordinates.getXCoordinate() + ":" + this.coordinates.getYCoordinate() + ":" + this.heading.getCompassDirection();
+        if(isOutOfBounds == true){
+            position = position + " LOST";
+        }
+        return position;
     }
 
 }
