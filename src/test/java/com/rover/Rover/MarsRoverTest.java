@@ -59,7 +59,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void an_exception_is_thrown_if_a_command_the_rover_doesnt_understand_is_passed_to_it() {
+    public void an_exception_is_thrown_if_a_command_the_rover_doesnt_understand_is_passed_to_it() throws Exception {
         Coordinates coordinates = new Coordinates(0, 0);
         MarsRover marsRover = new MarsRover(coordinates, CardinalDirection.NORTH, defaultGrid);
         Exception exception = assertThrows(Exception.class, () -> {
@@ -73,7 +73,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void an_exception_is_thrown_if_the_series_of_instructions_given_to_the_rover_are_too_long() {
+    public void an_exception_is_thrown_if_the_series_of_instructions_given_to_the_rover_are_too_long() throws Exception {
         Coordinates coordinates = new Coordinates(0, 0);
         MarsRover marsRover = new MarsRover(coordinates, CardinalDirection.NORTH, defaultGrid);
         

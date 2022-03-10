@@ -6,6 +6,8 @@ public class MarsRover {
     private Coordinates coordinates;
     private CardinalDirection heading;
     private Grid grid;
+    private final String instructionListTooLong = "The rover cannot parse a command list of 100 or more instructions";
+    private final String unknownInstruction = "Command not recognised";
 
     public MarsRover(Coordinates coordinates, CardinalDirection heading, Grid grid) {
         this.coordinates = coordinates;
@@ -41,7 +43,7 @@ public class MarsRover {
     public String execute(String commandList) throws Exception {
         
         if(commandList.length() >= 100){
-            throw new Exception("The rover cannot parse a command list of 100 or more instructions");
+            throw new Exception(instructionListTooLong);
         }
         
         String[] commands = commandList.split("");
@@ -58,7 +60,7 @@ public class MarsRover {
                     moveForward();
                     break;
                 default:
-                    throw new Exception("Command not recognised");
+                    throw new Exception(unknownInstruction);
             }
         }
 
